@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <style>
+        .calculator {
+            width: 300px;
+            margin: 50px auto;
+            border: 2px solid #333;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .result {
+            margin-bottom: 10px;
+            font-size: 24px;
+            text-align: right;
+            padding: 5px;
+            border: 1px solid #999;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+        }
+
+        .button {
+            padding: 10px;
+            font-size: 18px;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #ccc;
+        }
+
+        .button:hover {
+            background-color: #aaa;
+        }
+
+        .equals-button {
+            grid-column: span 4;
+        }
+
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: none;
+        }
+
+        #overlay img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            animation: fadeIn 10s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 align="center">CALCULADORA</h1>
+    <h2 align="center">Faça uma conta aí</h2>
+    <div class="calculator">
+        <div class="result" id="result">0</div>
+        <div class="buttons">
+            <button class="button" onclick="appendToResult(1)">1</button>
+            <button class="button" onclick="appendToResult(2)">2</button>
+            <button class="button" onclick="appendToResult(3)">3</button>
+            <button class="button" onclick="appendToResult('+')">+</button>
+            <button class="button" onclick="appendToResult(4)">4</button>
+            <button class="button" onclick="appendToResult(5)">5</button>
+            <button class="button" onclick="appendToResult(6)">6</button>
+            <button class="button" onclick="appendToResult('-')">-</button>
+            <button class="button" onclick="appendToResult(7)">7</button>
+            <button class="button" onclick="appendToResult(8)">8</button>
+            <button class="button" onclick="appendToResult(9)">9</button>
+            <button class="button" onclick="appendToResult('*')">*</button>
+            <button class="button" onclick="clearResult()">C</button>
+            <button class="button" onclick="appendToResult(0)">0</button>
+            <button class="button" onclick="appendToResult('/')">/</button>
+
+            <button class="button equals-button" onclick="calculate()">=</button>
+        </div>
+    </div>
+
+    <div id="overlay">
+        <img src="img/Não sei.png">
+    </div>
+
+    <audio id="audio" src="audio/50 cent - candy shop (slowed + reverb).mp3"></audio>
+
+    <script>
+        function calculate() {
+            // Calculate result
+            var result = eval(document.getElementById("result").textContent);
+
+            // Show overlay
+            document.getElementById("overlay").style.display = "block";
+
+            // Play audio
+            var audio = document.getElementById("audio");
+            audio.play();
+        }
+
+        function appendToResult(value) {
+            document.getElementById("result").textContent += value;
+        }
+
+        function clearResult() {
+            document.getElementById("result").textContent = "";
+        }
+    </script>
+</body>
+</html>
